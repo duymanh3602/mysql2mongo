@@ -17,6 +17,7 @@
       "typeorm": "0.3.19"
    },
    "scripts": {
+      "gen": "ts-node src/test/generate-records.ts dotenv_config_path=.env.local",
       "start": "ts-node src/index.ts dotenv_config_path=.env",
       "local": "ts-node src/index.ts dotenv_config_path=.env.local",
       "typeorm": "typeorm-ts-node-commonjs"
