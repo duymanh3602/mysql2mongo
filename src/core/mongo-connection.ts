@@ -3,6 +3,7 @@ import { Schema, model, connect, Date } from 'mongoose';
 import { Questions } from '../entity/Questions';
 
 const CONNECT_STRING = process.env.MONGO_CONNECT_STRING ?? '';
+const COLLECTION_NAME = process.env.MONGO_COLLECTION_NAME ?? 'questions';
 
 // 1. Create an interface representing a document in MongoDB.
 interface IQuestion {
@@ -32,10 +33,10 @@ const questionSchema = new Schema<IQuestion>({
     CreatedBy: { type: String, required: false },
     ModifiedDate: { type: String, required: true },
     ModifiedBy: { type: String, required: false },
-}, { versionKey: false });
+}, { versionKey: false, collection: COLLECTION_NAME });
 
 // 3. Create a Model.
-export const Question = model<IQuestion>('questions', questionSchema);
+export const Question = model<IQuestion>('', questionSchema);
 
 export async function bulkQuestion(questions: Questions) {
   // 4. Connect to MongoDB
@@ -44,7 +45,8 @@ export async function bulkQuestion(questions: Questions) {
 
     const question = new Question({
       ...questions,
-      QuestionId: questions.id,
+      IsUpdate: true,
+      QuestionId: questions.Id,
     });
 
     await question.save();

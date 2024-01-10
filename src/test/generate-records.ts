@@ -17,7 +17,7 @@ const generate = (length: number, upper?: boolean) => {
 
 const generateQuestion = async () => {
     const question: Questions = {
-        id: randomUUID(),
+        Id: randomUUID(),
         DataHash: generate('B1343224B3C3B73D6450D05C5D8D7102'.length, true),
         Content: generate(30),
         Remember: generate(30),
@@ -46,7 +46,7 @@ const worker = async (length?: number) => {
                 process.exit();
             }).catch((err) => {
                 console.log(err);
-            }); 
+            });
         } catch (err) {
             console.log(err); 
         }

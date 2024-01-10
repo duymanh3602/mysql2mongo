@@ -1,10 +1,12 @@
-import { Entity, Column, PrimaryColumn } from "typeorm"
+import { Entity, Column, PrimaryColumn, Table } from "typeorm"
 
-@Entity({name: 'questions'})
+const TB_NAME = process.env.MYSQL_TABLE_NAME ?? 'questions';
+// Đổi tên bảng tùy tên viết hoa hay viết thường
+@Entity({name: TB_NAME})
 export class Questions {
 
     @PrimaryColumn('char', {length: 36})
-    id: string
+    Id: string
 
     @Column()
     DataHash: string

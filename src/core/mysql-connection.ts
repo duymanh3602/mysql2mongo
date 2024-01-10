@@ -18,7 +18,7 @@ export const MySQLDataSource = new DataSource({
     username: MYSQL.user,
     password: MYSQL.password,
     database: MYSQL.database,
-    synchronize: true,
+    // synchronize: true, # không sử dụng để tránh ảnh hưởng ngược tới db gốc.
     logging: false,
     entities: [Questions],
     migrations: [],
