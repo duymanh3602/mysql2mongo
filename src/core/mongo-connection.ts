@@ -38,18 +38,21 @@ const questionSchema = new Schema<IQuestion>({
 // 3. Create a Model.
 export const Question = model<IQuestion>('', questionSchema);
 
-export async function bulkQuestion(questions: Questions) {
+export async function bulkQuestion(questions: Questions[]) {
   // 4. Connect to MongoDB
   try {
     await connect(CONNECT_STRING);
 
-    const question = new Question({
-      ...questions,
-      IsUpdate: true,
-      QuestionId: questions.Id,
-    });
-
-    await question.save();
+    await Promise.all(
+      questions.map(async (q) => {
+        const question = new Question({
+          ...q,
+          IsUpdate: true,
+          QuestionId: q.Id,
+        });
+        await question.save();
+      })
+    );
   } catch (err) {
     console.log(err);
   }

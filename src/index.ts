@@ -7,18 +7,16 @@ const questionRepository = MySQLDataSource.getRepository(Questions);
 
 const worker = async (index: number) => {
     await questionRepository.find({
-        take: 1000,
+        take: 4000,
         skip: index
     })
     .then(async (questions) => {
-        questions.forEach( async (question) => {
-            await bulkQuestion(question);
-        });
+        await bulkQuestion(questions);
     })
 }
 
 const loadData = async () => {
-    let start = performance.now();
+    // let start = performance.now();
     await MySQLDataSource.initialize().then( async () => {
         try {
             const dataLength = await questionRepository.count();
@@ -28,19 +26,18 @@ const loadData = async () => {
             }
 
             /** C1 - 125s */
+            /** V2 - 110s */
             let promiseAll = [];
-            for (var i = 0; i <= dataLength / 1000; i++) {                
+            for (var i = 0; i <= dataLength / 4000; i++) {                
                 promiseAll.push(await worker(i)
                     .then(() => {
-                        console.log("Imported " + i);
+                        console.log("Loaded " + i);
                         }
                     )
                 )
             }
             Promise.all(promiseAll).then(() => {
-                const now = performance.now();
-                console.log(`DONE w/ ${now - start} (ms) estimated for ${dataLength} ${dataLength === 1 ? 'record' : 'records'}`);
-                // process.exit();
+                console.log(`Importing ${dataLength} ${dataLength === 1 ? 'record' : 'records'}`);
             }).catch((err) => {
                 console.log(err);
             });
