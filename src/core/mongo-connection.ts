@@ -38,13 +38,19 @@ const questionSchema = new Schema<IQuestion>({
 // 3. Create a Model.
 export const Question = model<IQuestion>('', questionSchema);
 
+const options = {
+  connectTimeoutMS: 100000,
+  socketTimeoutMS: 100000,
+};
+
 export async function bulkQuestion(questions: Questions[]) {
   // 4. Connect to MongoDB
   try {
-    await connect(CONNECT_STRING);
+    await connect(CONNECT_STRING, options);
 
     await Promise.all(
       questions.map(async (q) => {
+        if (!q.Id || q.Id === '') return;
         const question = new Question({
           ...q,
           IsUpdate: true,
