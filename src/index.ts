@@ -76,8 +76,8 @@ const loadData = async () => {
                     if (bulkFlag && updateFlag) {
                         console.log('Waiting for 10 seconds to exit ...');
                         
-                        const delay = 10000;
-                        // Wait for 10 seconds to complete all await processes before exit the program 
+                        const delay = 60000;
+                        // Wait for 60 seconds to complete all await processes before exit the program 
                         setTimeout(myCallback, delay);
                     }
                 })
