@@ -44,3 +44,7 @@ MYSQL_DATABASE= // Schema sử dụng
 MYSQL_TABLE_NAME= // Bảng Question import
 
 BATCH_SIZE= // số lượng lấy mỗi lần để tối ưu (mặc định 1000 records / req)
+
+## Không dừng đột ngột khi đang chạy => do chưa đồng bộ được update vào mongo và cập nhật IsUpdate vào trong MySQL. 
+
+## Nhận q và chờ các task complete để tắt.

@@ -48,13 +48,14 @@ export async function bulkQuestion(questions: Questions[]) {
 
     await Promise.all(
       questions.map(async (q) => {
-        if (!q.Id || q.Id === '') return;
-        const question = new Question({
-          ...q,
-          IsUpdate: true,
-          QuestionId: q.Id,
-        });
-        await question.save();
+        if (!q.IsUpdate) {
+          const question = new Question({
+            ...q,
+            IsUpdate: true,
+            QuestionId: q.Id,
+          });
+          await question.save();
+        }
       })
     );
   } catch (err) {
