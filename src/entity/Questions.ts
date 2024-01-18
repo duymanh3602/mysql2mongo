@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, Table } from "typeorm"
 
-const TB_NAME = process.env.MYSQL_TABLE_NAME ?? 'questions';
+const TB_NAME = process.env.MYSQL_TABLE_NAME ?? 'Questions';
 // Đổi tên bảng tùy tên viết hoa hay viết thường
 @Entity({name: TB_NAME})
 export class Questions {

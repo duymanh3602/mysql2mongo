@@ -13,7 +13,6 @@ interface IQuestion {
     Remember: string
     Solve: string
     CorrectAnswer: string
-    IsUpdate?: boolean
     CreatedDate: Date
     CreatedBy?: UUID
     ModifiedDate: Date
@@ -22,16 +21,15 @@ interface IQuestion {
 
 // 2. Create a Schema corresponding to the document interface.
 const questionSchema = new Schema<IQuestion>({
-    QuestionId: { type: String, required: true },
-    DataHash: { type: String, required: true },
-    Content: { type: String, required: true },
-    Remember: { type: String, required: true },
-    Solve: { type: String, required: true },
-    CorrectAnswer: { type: String, required: true },
-    IsUpdate: { type: Boolean, required: false },
-    CreatedDate: { type: String, required: true },
+    QuestionId: { type: UUID, required: false },
+    DataHash: { type: String, required: false },
+    Content: { type: String, required: false },
+    Remember: { type: String, required: false },
+    Solve: { type: String, required: false },
+    CorrectAnswer: { type: String, required: false },
+    CreatedDate: { type: Date, required: false },
     CreatedBy: { type: String, required: false },
-    ModifiedDate: { type: String, required: true },
+    ModifiedDate: { type: Date, required: false },
     ModifiedBy: { type: String, required: false },
 }, { versionKey: false, collection: COLLECTION_NAME });
 
