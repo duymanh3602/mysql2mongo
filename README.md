@@ -41,7 +41,7 @@ MYSQL_PASSWORD= // Password mysql
 
 MYSQL_DATABASE= // Schema sử dụng
 
-MYSQL_TABLE_NAME= // Bảng Question import
+MYSQL_TABLE_NAME= // Bảng Question export
 
 BATCH_SIZE= // số lượng lấy mỗi lần để tối ưu (mặc định 1000 records / req)
 
